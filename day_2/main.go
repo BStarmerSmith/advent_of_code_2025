@@ -5,9 +5,8 @@ import (
 )
 
 func main() {
-	fmt.Println("Advent of Code 2025 - Day 1")
+	fmt.Println("Advent of Code 2025 - Day 2")
 	fmt.Println("===========================")
 
-	Day1()
-	Day1P2()
+	Day2()
 }

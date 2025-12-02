@@ -7,6 +7,11 @@ func SplitLines(s string) []string {
 	return strings.Split(strings.TrimSpace(s), "\n")
 }
 
+// SplitByDelimiter splits a string into substrings separated by a delimiter
+func SplitByDelimiter(s string, delimiter string) []string {
+	return strings.Split(strings.TrimSpace(s), delimiter)
+}
+
 // SplitByEmptyLines splits text by empty lines (useful for grouped inputs)
 func SplitByEmptyLines(s string) []string {
 	return strings.Split(strings.TrimSpace(s), "\n\n")

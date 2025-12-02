@@ -6,31 +6,22 @@ import (
 	"strconv"
 )
 
-var dialStart = 50
-var lowerBound = 0
-var upperBound = 99
-var timesAtZero = 0
+var p2dialStart = 50
+var p2timesAtZero = 0
 
-func splitString(s string) (string, int) {
-	return s[:1], utils.MustAtoi(s[1:])
-}
-
-func Day1() {
+func Day1P2() {
 	lines := utils.ReadFileLines("input.txt")
 	for _, line := range lines {
 		direction, distance := splitString(line)
-		dialNext := rotateDial(dialStart, direction, distance)
-		if dialNext == 0 {
-			timesAtZero++
-		}
+		dialNext := rotateDialP2(p2dialStart, direction, distance)
 
-		dialStart = dialNext
+		p2dialStart = dialNext
 	}
-	fmt.Println("P1 Times at Zero: " + strconv.Itoa(timesAtZero))
+	fmt.Println("P2 Times at Zero: " + strconv.Itoa(p2timesAtZero))
 }
 
 // rotateDial recursively rotates the dial until it reaches the distance
-func rotateDial(dialStart int, direction string, distance int) int {
+func rotateDialP2(dialStart int, direction string, distance int) int {
 	// Base case: no more distance to travel
 	if distance == 0 {
 		return dialStart
@@ -42,14 +33,20 @@ func rotateDial(dialStart int, direction string, distance int) int {
 		if nextPos < lowerBound {
 			nextPos = upperBound
 		}
-		return rotateDial(nextPos, direction, distance-1)
+		if nextPos == 0 {
+			p2timesAtZero++
+		}
+		return rotateDialP2(nextPos, direction, distance-1)
 
 	case "R":
 		nextPos := dialStart + 1
 		if nextPos > upperBound {
 			nextPos = lowerBound
 		}
-		return rotateDial(nextPos, direction, distance-1)
+		if nextPos == 0 {
+			p2timesAtZero++
+		}
+		return rotateDialP2(nextPos, direction, distance-1)
 
 	default:
 		panic("Invalid direction")
