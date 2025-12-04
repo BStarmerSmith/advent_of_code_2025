@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // ReadFileLines reads a file and returns its lines as a slice of strings
@@ -25,4 +26,13 @@ func ReadFileLines(filename string) []string {
 	}
 
 	return lines
+}
+
+func ReadFile2DChar(filename string) [][]string {
+	lines := ReadFileLines(filename)
+	var grid [][]string
+	for _, line := range lines {
+		grid = append(grid, strings.Split(line, ""))
+	}
+	return grid
 }
